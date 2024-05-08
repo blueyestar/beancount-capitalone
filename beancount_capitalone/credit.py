@@ -48,11 +48,9 @@ class CreditImporter(importer.ImporterProtocol):
         if not match:
             return False
 
-        with open(file.name, encoding='utf-8') as csv_file:
-            for row in csv.DictReader(csv_file):
-                return row['Card No.'] == self._last_four_account_digits
+        return True 
 
-    def extract(self, f):
+    def extract(self, f, existing_entries=None):
         transactions = []
 
         with open(f.name, encoding='utf-8') as csv_file:
